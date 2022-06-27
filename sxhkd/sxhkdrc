@@ -1,0 +1,90 @@
+# Reload functions
+super + Escape
+	"$XDG_CONFIG_HOME"/sxhkd/functions
+
+# terminal emulator
+super + Return
+        st
+
+#dmenu
+super + @space 
+	dmenu_run
+
+# reload sxhkd conf file
+super + r 
+	pkill -USR1 -x sxhkd
+
+# reload bspwm conf
+super + shift + r
+	~/.config/bspwm/bspwmrc
+
+# restart bspwm
+super + shift + q
+ 	bspc {quit}
+
+# close and kill
+super + q
+       	bspc node -{c,k}
+
+# Toggle full screen 
+super + f 
+	bspc node --state \~fullscreen
+
+# switch between tiled and monocle layout
+super + m
+	bspc node -s biggest.local
+
+# floating
+super + shift + f
+	bspc node -t {floating,tiled}
+
+# Toggle pseudo tilling window
+super + t
+	bspc node --state \~pseudo_tiled
+
+# volume manager
+super + v 
+	pavucontrol 
+
+# focus next window
+super + {_,shift + }n
+	bspc node -f {next,prev}.local.!hidden.window
+
+# Next workspace
+super + 2
+	bspc desktop --focus II
+
+super + 3
+	bspc desktop --focus III
+
+super + 4
+	bspc desktop --focus IV
+
+# previous workspace 
+super + 1
+	bspc desktop --focus I
+
+
+# expand window by left outside
+super + alt + { h }
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + alt + l
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# screenshot 
+@Print 
+	scrot -s --line mode=edge ~/pix/Screenshots/%Y-%m-%d_%H:%M:%S-scrot.png
+
+
+# full screen shot
+ctrl + @Print
+	scrot -d1 && mv *.png ~/pix/Screenshots/
+
+#Volume Control
+super + Down
+	amixer set Master 5%-
+super + Up
+	amixer set Master 5%+
+super + minus
+        pactl set-sink-mute 0 toggle

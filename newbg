@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+wall=$(find $HOME/pix/Pictures/Wall -type f | shuf -n 1)
+bash ~/my-bspwm-configs/pywal.sh $wall
+
