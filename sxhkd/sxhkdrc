@@ -66,11 +66,18 @@ super + 1
 
 
 # expand window by left outside
-super + alt + { h }
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+#super + alt + { h }
+#	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + {h,j,k,l}
+  bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
-super + alt + l
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+#contract 
+#super + alt + l
+#	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + shift + {h,j,k,l}
+  bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+
 
 # screenshot 
 @Print 
@@ -88,3 +95,17 @@ super + Up
 	amixer set Master 5%+
 super + minus
         pactl set-sink-mute 0 toggle
+
+
+# move focused window to the next workspace and then switch to that workspace
+alt + shift + {Left,Right}
+    id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
+
+
+# toggle polybar
+super + b
+     {polybar-msg cmd hide; bspc config -m focused top_padding 0, polybar-msg cmd show; bspc config -m focused top_padding 40}
+
+
+
+
