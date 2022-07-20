@@ -14,5 +14,6 @@ picom -fb
 xsetroot -cursor_name left_ptr
 #bash ~/.config/polybar/launch.sh --hack
 ~/.local/bin/newbg
+bash .config/polybar/launch.sh --shades &
 exec bspwm 
 #exec xmonad
